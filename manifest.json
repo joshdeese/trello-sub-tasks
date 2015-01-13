@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    
+    "name": "Trello Sub-tasks",
+    "description": "Takes a card and converts all checklist items that are incomplete to new cards. Then, replaces the old checklist items with links to the new cards",
+    "version": "0.23",
+    
+    "permissions": [ "webNavigation", "webRequest", "webRequestBlocking", "tabs", "storage", "background", "https://trello.com/", "https://api.trello.com/"],
+    "background": {
+        "persistent": true,
+        "scripts": ["jquery.min.js", "client.js", "background.js"]
+    },
+    
+    "content_scripts": [{
+        "js": ["card.js"],
+        "matches": [ "https://trello.com/*" ]
+    }, {
+        "js": ["authorize.js"],
+        "matches": [ "https://trello.com/1/token/approve" ]
+    }]
+}
