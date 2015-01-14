@@ -41,6 +41,7 @@ var convert_items = function (cardId) {
         
         var check_item = checkItems.shift();
         if(check_item.state == 'incomplete'){
+            var newDesc = "Parent: " + myCard.shortURL;
             var create_card_url = api.url+'/cards?key='+api.key+'&token='+api.token+'&idList='+myCard.idList+'&name='+check_item.name+'&desc='+myCard.shortURL;
             var xhr_create_card = new XMLHttpRequest();
             xhr_create_card.onreadystatechange = function(e){
