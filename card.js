@@ -118,20 +118,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             sendResponse({farewell: "button already exists"});
         }
     }
-    
-    if(request.greeting == "get_token"){
-        Trello.setKey('e2793173afc32c8c568423143f7b04ae');
-        
-        Trello.authorize({
-            type: "popup",
-            name: "Trello Sub-tasks",
-            expiration: "never",
-            success: function(){
-                console.log('token generated');
-            },
-            error: function(){
-                console.log('error generating token');
-            }
-        });
-    }
 });
