@@ -2,7 +2,7 @@
     "manifest_version": 2,
     
     "name": "Trello Sub-tasks",
-    "description": "Takes a card and converts all checklist items that are incomplete to new cards. Then, replaces the old checklist items with links to the new cards",
+    "description": "Converts all incomplete checklist items to new cards. Then, replaces the old checklist items with links to the new cards",
     "version": "0.1.1",
     
     "permissions": [ "webNavigation", "webRequest", "webRequestBlocking", "tabs", "storage", "background", "https://trello.com/", "https://api.trello.com/"],
