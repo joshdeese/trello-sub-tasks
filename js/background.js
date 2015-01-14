@@ -23,25 +23,15 @@ function user_token(){
                 console.log(response);
             });
         });
-        
-        /*Trello.setKey('e2793173afc32c8c568423143f7b04ae');
-        
-        Trello.authorize({
-            type: "popup",
-            name: "Trello Sub-tasks",
-            persist: true,
-            scope: {read: true, write: true},
-            expiration: "never",
-            success: function(){
-                Trello.members.get('me', function(member){
-                    console.log(member);
-                });
-            },
-            error: function(){
-                console.log('problems');
-            }
-        });*/
     }
+}
+
+function revoke_token(){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        chrome.tabs.sendMessage(tabs[0].id, {greeting: "revoke_token"}, function(response){
+            delete api.token;
+        });
+    });
 }
 
 chrome.webNavigation.onCompleted.addListener(user_token, {url: [{hostContains : 'trello.com'}]});
@@ -50,11 +40,8 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(function(){addButton('onH
 chrome.webNavigation.onCompleted.addListener(function(){addButton('onCompleted');}, {url: [{hostContains : 'trello.com', pathContains : 'c' }]});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-    console.log(sender.tab ?
-               "from a content script:" + sender.tab.url :
-               "from the extension");
     if(request.greeting == "got_token"){
         api.token = request.token;
-        sendResponse({farewell: "goodbye", Trello: Trello});
+        sendResponse({farewell: "goodbye"});
     }
 });
